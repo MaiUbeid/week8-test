@@ -14,8 +14,13 @@ exports.postLogin = (req, res, next) => {
   let id;
   getUser(email)
     .then(res => {
-      id = res.rows[0].id;
-      return compare(password, res.rows[0].user_password);
+      console.log(res.rows);
+      if (res.rows.length === 0) {
+        throw new Error('User Does not exist');
+      } else {
+        id = res.rows[0].id;
+        return compare(password, res.rows[0].user_password);
+      }
     })
     .then(result => {
       if (result) {
@@ -23,8 +28,12 @@ exports.postLogin = (req, res, next) => {
         res.cookie('token', token, { maxAge: 86400000, httpOnly: true });
         res.redirect('/cities');
       } else {
-        throw new Error('User Does not exist');
+        throw new Error('The password is wrong');
       }
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      if (err.message == 'User Does not exist') res.send(err.message);
+      else if (err.message === 'The password is wrong') res.send(err.message);
+      else next(err);
+    });
 };

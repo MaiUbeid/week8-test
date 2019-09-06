@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
-    "dev": "nodemon server/index.js"
+    "start": "NODE_ENV=production node server/index.js",
+    "dev": "NODE_ENV=development nodemon server/index.js"
   },
   "repository": {
     "type": "git",
