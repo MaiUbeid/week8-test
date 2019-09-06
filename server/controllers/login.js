@@ -20,11 +20,11 @@ exports.postLogin = (req, res, next) => {
     .then(result => {
       if (result) {
         let token = sign({ email: email }, key);
-        res.cookie('token', token, { maxAge: 10000, httpOnly: true });
+        res.cookie('token', token, { maxAge: 86400000, httpOnly: true });
         res.redirect('/cities');
       } else {
         throw new Error('User Does not exist');
       }
     })
-    .catch(next);
+    .catch(err => console.log(err));
 };
