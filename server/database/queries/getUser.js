@@ -1,11 +1,10 @@
 // Write a query to get the user and their password from the database
 const dbConnection = require('../config/connection');
 
-const getUser = userData => {
-  const { email } = userData;
+const getUser = email => {
   const sql = {
-    text: 'SELECT user_password FROM users WHERE email = ($1);',
-    value: [email]
+    text: 'SELECT * FROM users WHERE email LIKE ($1);',
+    values: [email]
   };
   return dbConnection.query(sql);
 };

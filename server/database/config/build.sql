@@ -10,8 +10,8 @@ CREATE TABLE city (
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
-  email VARCHAR(20) UNIQUE NOT NULL,
-  user_password VARCHAR(30)
+  email VARCHAR(100) UNIQUE NOT NULL,
+  user_password VARCHAR(600)
 );
 
 INSERT INTO city (name, country) VALUES
@@ -19,6 +19,6 @@ INSERT INTO city (name, country) VALUES
   ('London', 'UK'),
   ('New York', 'USA');
 
-INSERT INTO users (email, user_password) VALUES ('mai@gmail.com', '123gaza');
+INSERT INTO users (email, user_password) VALUES ('mai@gmail.com', '$2b$10$0hBTpRAWR6pksD0PFwMmS.RkmIZuxcX0k6eHtvpEFRHd/2tAP/gpa');
 
 COMMIT;
