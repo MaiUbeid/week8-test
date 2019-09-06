@@ -18,7 +18,7 @@ exports.postSignup = (req, res, next) => {
     .then(hashedPassword => addUser({ email, password: hashedPassword }))
     .then(() => res.redirect('/login'))
     .catch(err => {
-      if (err.message === 'Email exists') console.log(err.message);
-      // else next(err);
+      if (err.message === 'Email exists') res, send(err.message);
+      else next(err);
     });
 };
